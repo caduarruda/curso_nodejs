@@ -1,24 +1,47 @@
-const request = require('request');
-const yargs = require('yargs');
+ const yargs = require('yargs');
+ const roundTo = require('round-to');
 
-const argv = yargs
-            .options({
-                e: {
-                    demand: true,
-                    alias: 'end',
-                    describe: 'Endereço referência para as informações do tempo.',
-                    string: true
+ const geocode = require('./geocode/geocode');
+ const weather = require('./weather/weather');
+
+ // Converter graus farenheit em celsius
+ var convTemp = ( grausf ) => {
+    return roundTo( (grausf - 32)/1.8000, 2 );
+ };
+
+ const argv = yargs
+             .options({
+                 e: {
+                     demand: true,
+                     alias: 'end',
+                     describe: 'Endereço referência para as informações do tempo.',
+                     string: true
+                 }
+             })
+             .help()
+             .alias('help','h')
+             .argv;
+
+  geocode.geoEndereco(argv.end, (msgErro, resultado ) => {
+      if (msgErro) {
+          console.log(msgErro);
+      } else {
+            weather.getInfo(resultado.latitude, resultado.longitude, (wmsgErro, wresultado) => {
+                if(wmsgErro) {
+                    console.log(wmsgErro);
+                } else {
+                    var temp = convTemp( wresultado.temperature);
+                    var sens = convTemp( wresultado.apparentTemperature);
+                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Tempo APP -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-');
+                    console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Fonte: Google e Forecast.io -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+                    console.log(`Endereço consultado:  ${resultado.endereco}`);
+                    console.log(`Latitude: ${resultado.latitude}`);
+                    console.log(`Longitude: ${resultado.longitude}`);
+                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+                    console.log(`Estão fazendo agora: ${temp} graus em ${resultado.endereco}.`);
+                    console.log(`Sensação térmica de: ${sens} graus.`)
+                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
                 }
-            })
-            .help()
-            .alias('help','h')
-            .argv;
-request({
-    url: 'https://maps.googleapis.com/maps/api/geocode/json?address=avenida%20celso%20garcia,%205754%20tatuape%20sao%20paulo,cep%2003064000&key=AIzaSyBuCN6iTNS4XYed_007jdQdVzXOed2f6mI',
-    json: true
- }, (error, response, body) => {
-     //console.log(JSON.stringify(body, undefined, 2));
-     console.log(`Endereço: ${body.results[0].formatted_address}`);
-     console.log(`Latitude: ${body.results[0].geometry.location.lat}`);
-     console.log(`Longitude: ${body.results[0].geometry.location.lng}`);
-});
+            });
+        }
+  });
