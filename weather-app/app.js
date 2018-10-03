@@ -32,15 +32,15 @@
                 } else {
                     var temp = convTemp( wresultado.temperature);
                     var sens = convTemp( wresultado.apparentTemperature);
-                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Tempo APP -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-');
-                    console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Fonte: Google e Forecast.io -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-= Tempo APP =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-');
+                    console.log('=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=- Fonte: Google e Forecast.io -=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
                     console.log(`Endereço consultado:  ${resultado.endereco}`);
                     console.log(`Latitude: ${resultado.latitude}`);
                     console.log(`Longitude: ${resultado.longitude}`);
-                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
-                    console.log(`Estão fazendo agora: ${temp} graus em ${resultado.endereco}.`);
+                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+                    console.log(`Está fazendo agora: ${temp} graus em ${resultado.endereco}.`);
                     console.log(`Sensação térmica de: ${sens} graus.`)
-                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=');
+                    console.log('-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-==-=-=-=-');
                 }
             });
         }
