@@ -1,8 +1,4 @@
-<<<<<<< HEAD
 // Comentario para Branch V3
-=======
-// Teste Branch V2
->>>>>>> ce110215e77c3c898eb5f4b5b79182c3528c05cf
 
 const users = [{
   id: 1,
