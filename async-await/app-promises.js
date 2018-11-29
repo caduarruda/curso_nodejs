@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 // Comentario para Branch V3
+=======
+// Teste Branch V2
+>>>>>>> ce110215e77c3c898eb5f4b5b79182c3528c05cf
 
 const users = [{
   id: 1,
@@ -23,7 +27,7 @@ const grades = [{
   schoolId: 101,
   grade: 80
 }];
-
+ 
 const getUser = (id) => {
   return new Promise((resolve, reject) => {
     const user = users.find((user) => user.id === id);
